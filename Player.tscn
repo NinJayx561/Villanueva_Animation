@@ -1,0 +1,111 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://New folder/NinJayx.gltf" type="PackedScene" id=2]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "Cross Punch-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "Dodging Right-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Fall A Loop (1)-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "Getting Up (1)-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Hit To Body-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Magic Spell Casting-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Punch Combo-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Standing Idle Looking Ver 2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Standing Melee Attack 360 Low-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachine" id=26]
+"states/Cross Punch-loop/node" = SubResource( 1 )
+"states/Cross Punch-loop/position" = Vector2( 548, 326 )
+"states/Dodging Right-loop/node" = SubResource( 2 )
+"states/Dodging Right-loop/position" = Vector2( 223, 253 )
+"states/Fall A Loop (1)-loop/node" = SubResource( 3 )
+"states/Fall A Loop (1)-loop/position" = Vector2( 548, 42 )
+"states/Getting Up (1)-loop/node" = SubResource( 4 )
+"states/Getting Up (1)-loop/position" = Vector2( 548, 172 )
+"states/Hit To Body-loop/node" = SubResource( 5 )
+"states/Hit To Body-loop/position" = Vector2( 548, 105 )
+"states/Magic Spell Casting-loop/node" = SubResource( 6 )
+"states/Magic Spell Casting-loop/position" = Vector2( 806, 394 )
+"states/Punch Combo-loop/node" = SubResource( 7 )
+"states/Punch Combo-loop/position" = Vector2( 548, 394 )
+"states/Standing Idle Looking Ver 2-loop/node" = SubResource( 8 )
+"states/Standing Idle Looking Ver 2-loop/position" = Vector2( 548, 253 )
+"states/Standing Melee Attack 360 Low-loop/node" = SubResource( 9 )
+"states/Standing Melee Attack 360 Low-loop/position" = Vector2( 253, 394 )
+transitions = [ "Dodging Right-loop", "Standing Idle Looking Ver 2-loop", SubResource( 10 ), "Standing Idle Looking Ver 2-loop", "Dodging Right-loop", SubResource( 11 ), "Standing Idle Looking Ver 2-loop", "Cross Punch-loop", SubResource( 12 ), "Cross Punch-loop", "Standing Idle Looking Ver 2-loop", SubResource( 13 ), "Magic Spell Casting-loop", "Standing Idle Looking Ver 2-loop", SubResource( 14 ), "Standing Idle Looking Ver 2-loop", "Magic Spell Casting-loop", SubResource( 15 ), "Standing Idle Looking Ver 2-loop", "Punch Combo-loop", SubResource( 16 ), "Punch Combo-loop", "Standing Idle Looking Ver 2-loop", SubResource( 17 ), "Standing Melee Attack 360 Low-loop", "Standing Idle Looking Ver 2-loop", SubResource( 18 ), "Standing Idle Looking Ver 2-loop", "Standing Melee Attack 360 Low-loop", SubResource( 19 ), "Getting Up (1)-loop", "Standing Idle Looking Ver 2-loop", SubResource( 20 ), "Standing Idle Looking Ver 2-loop", "Getting Up (1)-loop", SubResource( 21 ), "Hit To Body-loop", "Standing Idle Looking Ver 2-loop", SubResource( 22 ), "Fall A Loop (1)-loop", "Standing Idle Looking Ver 2-loop", SubResource( 23 ), "Standing Idle Looking Ver 2-loop", "Hit To Body-loop", SubResource( 24 ), "Standing Idle Looking Ver 2-loop", "Fall A Loop (1)-loop", SubResource( 25 ) ]
+start_node = "Standing Idle Looking Ver 2-loop"
+graph_offset = Vector2( 0, -14.9008 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
+
+[sub_resource type="CapsuleShape" id=28]
+radius = 0.5
+height = 1.2
+
+[node name="KinematicBody" type="KinematicBody"]
+script = ExtResource( 1 )
+animationtree = NodePath("AnimationTree")
+
+[node name="NinJayx" parent="." instance=ExtResource( 2 )]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 26 )
+anim_player = NodePath("../NinJayx/AnimationPlayer")
+active = true
+root_motion_track = NodePath("Armature/Skeleton:RootMotion")
+parameters/playback = SubResource( 27 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0888109, 0.778141, 0.0552566 )
+shape = SubResource( 28 )
+
+[editable path="NinJayx"]
